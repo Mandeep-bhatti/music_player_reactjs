@@ -1,0 +1,35 @@
+body {
+  margin: 0;
+  font-family: Jost;
+}
+.main-container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+}
+.main-box {
+  width: 25%;
+  height: 650px;
+  box-shadow: rgba(26, 29, 31, 0.2) 0px 8px 24px;
+  overflow: hidden;
+  border-radius: 25px;
+  /* padding: 20px;         */
+}
+.music-title {
+  text-align: center;
+  padding: 20px 0;
+  font-size: 25px;
+  font-weight: 500;
+}
+.music-thumbnail img {
+  width: 100%;
+}
+.music-thumbnail {
+  height: 60%;
+  overflow: hidden;
+  border-radius: 25px;
+}

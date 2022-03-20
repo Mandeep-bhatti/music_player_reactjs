@@ -1,0 +1,82 @@
+.main-control {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  margin: 0, 30px;
+}
+.pre-btn,
+.next-btn,
+.play-pause {
+  font-size: 22px;
+  border-radius: 80px;
+  height: 60px;
+  width: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #5a5a5a;
+  transition: 0.5s ease-in-out;
+  cursor: pointer;
+}
+.pre-btn:hover,
+.next-btn:hover,
+.play-pause:hover {
+  background-color: #efe8f6;
+}
+.pre-btn i,
+.next-btn i,
+.play-pause i {
+  filter: drop-shadow(2px, 2px, 2px, rgba(0, 0, 0, 0.3));
+}
+
+.anim {
+  animation: btns 0.5s ease;
+}
+@keyframes btns {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+.seek-container {
+  width: 75%;
+  display: flex;
+  flex-direction: column;
+  margin: 20px auto;
+}
+.seek-timing-box {
+  display: flex;
+  justify-content: space-between;
+}
+.seek-timing {
+  font-size: 15px;
+  font-weight: 500;
+}
+.seek-bar-outer {
+  margin-top: 15px;
+  height: 4px;
+  background-color: #f5f5f5;
+  border-radius: 10px;
+  cursor: pointer;
+  /* overflow: hidden; */
+}
+.seek-bar-inner {
+  background-color: orange;
+  width: 50%;
+  height: 100%;
+  position: relative;
+  border-radius: 10px;
+  /* transition: 0.5s ease; */
+}
+.sppiner {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: orange;
+  top: 0;
+  right: 0;
+  transform: translateX(-50%);
+}

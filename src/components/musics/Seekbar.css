@@ -1,0 +1,43 @@
+.main-seek-container {
+  width: 75%;
+  margin: 0 auto;
+  font-family: Poppins;
+  font-size: 15px;
+  color: #747474;
+}
+.seek-time-box {
+  display: flex;
+  justify-content: space-between;
+}
+.seekbar-outer {
+  width: 100%;
+  border-radius: 5px;
+  height: 4px;
+  background-color: #f9f9f9;
+}
+.seekbar-line-box {
+  height: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  margin: 10px 0;
+}
+.seekbar-inner {
+  width: 50%;
+  height: 4px;
+  border-radius: 5px;
+  background-color: orange;
+  display: block;
+  position: relative;
+}
+.rounder {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: rgb(247, 160, 0);
+  top: 0;
+  right: 0;
+  transform: translateY(-30%);
+}
