@@ -4,7 +4,7 @@ import Controls from "./Controls"
 import "./Music.css"
 
 function Music() {
-
+    console.log("music")
     const css = {
         backgroundImage: `linear-gradient(360deg,  rgba(0,0,0,.3) 0%,rgba(0,0,0,.0) 100%),url('./assets/1.jpg')`,
         backgroundSize: "cover",

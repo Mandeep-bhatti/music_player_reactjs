@@ -8,8 +8,10 @@ function Controls() {
 
     const dispatch = useDispatch();
     const state = useSelector((state) => state.Control);
-
+    console.log("components rendring")
     const [isPlaying, setPlaying] = useState(false);
+    const [curentPlayTime, setPlayTime] = useState(0)
+    const [duration, setDuration] = useState(0)
     const audioElement = useRef();
 
     const SongPath = React.useMemo(() => {
@@ -40,9 +42,20 @@ function Controls() {
         audioElement.current.play();
     }, [dispatch]);
 
+    const updateTiming = (event) => {
+        setTimeout(() => {
+            // cons ole.log(event.target.currentTime)
+            setPlayTime(event.target.currentTime)
+        }, 1000)
+
+    }
     return (
         <Fragment>
-            <Seekbar />
+            <Seekbar
+                currentTime={curentPlayTime}
+                duration={duration}
+
+            />
             <div className="main-control">
                 <div
                     onClick={prePlaySong}
@@ -58,6 +71,8 @@ function Controls() {
                     }
                 </div>
                 <audio
+                    onTimeUpdate={updateTiming}
+                    onEnded={myNextSong}
                     ref={audioElement}>
                     <source src={SongPath} />
                 </audio>
