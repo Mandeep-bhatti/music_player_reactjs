@@ -8,10 +8,10 @@ function Controls() {
 
     const dispatch = useDispatch();
     const state = useSelector((state) => state.Control);
-    console.log("components rendring")
     const [isPlaying, setPlaying] = useState(false);
     const [curentPlayTime, setPlayTime] = useState(0)
-    const [duration, setDuration] = useState(0)
+    const [duration, setDuration] = useState(0);
+    const [updateTime, setUpdateTime] = useState(0)
     const audioElement = useRef();
 
     const SongPath = React.useMemo(() => {
@@ -44,17 +44,25 @@ function Controls() {
 
     const updateTiming = (event) => {
         setTimeout(() => {
-            // cons ole.log(event.target.currentTime)
             setPlayTime(event.target.currentTime)
         }, 1000)
 
     }
+    const settingDuration = () => {
+        if (audioElement?.current.readyState > 0) {
+            setDuration(audioElement.current.duration);
+        }
+        return;
+    }
+    React.useEffect(() => {
+        audioElement.current.currentTime = updateTime
+    }, [updateTime])
     return (
         <Fragment>
             <Seekbar
                 currentTime={curentPlayTime}
                 duration={duration}
-
+                updateCurruntTime={setUpdateTime}
             />
             <div className="main-control">
                 <div
@@ -71,6 +79,7 @@ function Controls() {
                     }
                 </div>
                 <audio
+                    onLoadedMetadata={settingDuration}
                     onTimeUpdate={updateTiming}
                     onEnded={myNextSong}
                     ref={audioElement}>
@@ -85,6 +94,4 @@ function Controls() {
         </Fragment>
     )
 }
-
-
 export default Controls

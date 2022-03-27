@@ -30,6 +30,7 @@
   background-color: orange;
   display: block;
   position: relative;
+  transition: 0.3s ease;
 }
 .rounder {
   position: absolute;
@@ -40,4 +41,5 @@
   top: 0;
   right: 0;
   transform: translateY(-30%);
+  transition: 0.3s ease;
 }

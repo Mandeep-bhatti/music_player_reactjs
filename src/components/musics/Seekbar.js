@@ -1,16 +1,39 @@
-import React, { Fragment, useState, useCallback, useEffect } from 'react'
+import React, { Fragment, useState, useCallback, useEffect, memo } from 'react'
 import "./Seekbar.css"
-function Seekbar() {
+function Seekbar({ currentTime, updateCurruntTime, duration }) {
     const [dragging, setDragging] = useState(false);
     const [seekbarWidth, setSeekbarWidth] = useState(0);
+    const [showCurrentTime, setShowCurrnTime] = useState({ minute: 0, second: 0 })
+    const [durations, setDurations] = useState({ minute: 0, second: 0 })
     const seekbarRef = React.useRef();
+
+    useEffect(() => {
+        setDurations(
+            {
+                minute: Math.floor(duration / 60),
+                second: Math.floor(duration % 60)
+            }
+        )
+    }, [duration]);
+
+    useEffect(() => {
+        setShowCurrnTime({
+            minute: Math.floor(currentTime / 60),
+            second: Math.floor(currentTime % 60)
+        })
+        const percentageWidth = Math.floor(currentTime / duration * 100);
+        setSeekbarWidth(percentageWidth)
+    }, [currentTime, duration]);
 
     const mouseMoveAction = (event) => {
         if (dragging === false) return;
         const totalWidth = seekbarRef.current.clientWidth
         const clickedWidth = event.nativeEvent.offsetX;
-        const percentage = Math.floor(clickedWidth / totalWidth * 100)
-        console.log(Math.floor(clickedWidth / totalWidth * 100));
+        const percentage = Math.floor(clickedWidth / totalWidth * 100);
+        updateCurruntTime(Math.floor(clickedWidth / totalWidth * duration));
+        console.log(Math.floor(clickedWidth / totalWidth * duration));
+        console.log()
+
         setSeekbarWidth(percentage);
     }
 
@@ -22,15 +45,14 @@ function Seekbar() {
         setDragging(false)
     }, []);
 
-    useEffect(() => {
+    React.useEffect(() => {
         window.addEventListener("mousedown", mouseDownEvent);
-        window.addEventListener("mouseup", mouseUpEvent)
+        window.addEventListener("mouseup", mouseUpEvent);
         return () => {
             window.removeEventListener("mousedown", mouseDownEvent);
             window.removeEventListener("mouseup", mouseUpEvent);
-        }
+        };
     }, [mouseDownEvent, mouseUpEvent, dragging]);
-
 
     const defineSeekwidth = {
         width: `${seekbarWidth}%`
@@ -40,8 +62,14 @@ function Seekbar() {
         <Fragment>
             <div className="main-seek-container">
                 <div className="seek-time-box">
-                    <div>2.22</div>
-                    <div>5.55</div>
+                    <div>
+                        {`${showCurrentTime.minute < 10 ? 0 : ""}${showCurrentTime.minute}:`}
+                        {`${showCurrentTime.second < 10 ? 0 : ""}${showCurrentTime.second}`}
+                    </div>
+                    <div>
+                        {`${durations.minute < 10 ? 0 : ""}${durations.minute}:`}
+                        {`${durations.second < 10 ? 0 : ""}${durations.second}`}
+                    </div>
                 </div>
                 <div
                     ref={seekbarRef}
@@ -60,4 +88,4 @@ function Seekbar() {
     )
 }
 
-export default Seekbar
+export default memo(Seekbar)
