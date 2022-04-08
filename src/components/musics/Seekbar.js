@@ -31,9 +31,6 @@ function Seekbar({ currentTime, updateCurruntTime, duration }) {
         const clickedWidth = event.nativeEvent.offsetX;
         const percentage = Math.floor(clickedWidth / totalWidth * 100);
         updateCurruntTime(Math.floor(clickedWidth / totalWidth * duration));
-        console.log(Math.floor(clickedWidth / totalWidth * duration));
-        console.log()
-
         setSeekbarWidth(percentage);
     }
 
